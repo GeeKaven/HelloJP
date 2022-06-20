@@ -1,14 +1,14 @@
 import { useColorModeValue, Box, Flex, Text, CloseButton, UnorderedList, ListItem, List } from '@chakra-ui/react'
 import React from 'react'
 import { FiHome } from 'react-icons/fi'
-import NavLink from './NavLink'
+import NavLink from '../NavLink'
 
 const Menu = [
   { name: '首页', icon: FiHome, to: '/' },
   { name: '首页', icon: FiHome, to: '/' },
   { name: '首页', icon: FiHome, to: '/' },
   {
-    name: '动词变形练习', icon: FiHome,
+    name: '动词变形练习', icon: FiHome, to: '/verbs',
     sub: [
       { name: 'て形', icon: FiHome, to: '/verbs/te' },
       { name: '辞书形', icon: FiHome, to: '/verbs/jisho' },

@@ -1,3 +1,4 @@
+import { Link as RouterLink } from 'react-router-dom'
 import { Flex, Icon, Link } from '@chakra-ui/react'
 
 export type NavLinkProps = {
@@ -10,7 +11,7 @@ export default function NavLink({ link, ...rest }: NavLinkProps) {
   const {name, icon, to} = link
 
   return (
-    <Link href={to} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link as={RouterLink} to={to} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align='center'
         p='4'
