@@ -1,31 +1,10 @@
 import { useColorModeValue, Box, Flex, Text, CloseButton, UnorderedList, ListItem, List } from '@chakra-ui/react'
-import React from 'react'
-import { FiHome } from 'react-icons/fi'
+import React, { MouseEventHandler } from 'react'
 import NavLink from '../NavLink'
-
-const Menu = [
-  { name: '首页', icon: FiHome, to: '/' },
-  { name: '首页', icon: FiHome, to: '/' },
-  { name: '首页', icon: FiHome, to: '/' },
-  {
-    name: '动词变形练习', icon: FiHome, to: '/verbs',
-    sub: [
-      { name: 'て形', icon: FiHome, to: '/verbs/te' },
-      { name: '辞书形', icon: FiHome, to: '/verbs/jisho' },
-      { name: 'ない形', icon: FiHome, to: '/verbs/nai' },
-      { name: 'た形', icon: FiHome, to: '/verbs/ta' },
-      { name: '意向形', icon: FiHome, to: '/verbs/iko' },
-      { name: '命令形', icon: FiHome, to: '/verbs/meirei' },
-      { name: '条件形', icon: FiHome, to: '/verbs/joken' },
-      { name: '可能形', icon: FiHome, to: '/verbs/kano' },
-      { name: '被动、尊敬', icon: FiHome, to: '/verbs/ukemisonkei' },
-      { name: '使役形', icon: FiHome, to: '/verbs/shieki' },
-    ]
-  },
-]
+import { Menu } from '../../constants/menu'
 
 export type HeaderProps = {
-  onClose(): void;
+  onClose: MouseEventHandler<HTMLButtonElement>;
   [x: string]: any;
 }
 
@@ -51,7 +30,7 @@ export default function SideBar({ onClose, ...rest }: HeaderProps) {
         {Menu.map((link, i) => (
           <React.Fragment key={i}>
             <ListItem><NavLink link={link} /></ListItem>
-            {link.sub && 
+            {link.sub &&
               <List>
                 {link.sub.map((sub, j) => <ListItem key={j}><NavLink link={sub} mx='8' fontSize='sm' p='3' /></ListItem>)}
               </List>}

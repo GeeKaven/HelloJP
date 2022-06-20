@@ -1,8 +1,9 @@
 import { Flex, HStack, IconButton, Text, useColorModeValue } from "@chakra-ui/react";
+import { MouseEventHandler } from "react";
 import { FiBell, FiMenu } from "react-icons/fi"
 
 export type HeaderProps = {
-  onOpen(): void,
+  onOpen: MouseEventHandler<HTMLButtonElement>,
   [x: string]: any,
 }
 
