@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom"
-import Words from "../../../db/words.json"
-import Config from "../../../constants/config"
-import { WordType } from "../../../constants/types"
-import { randomArray } from "../../../utils/utils"
+import Words from "@db/words.json"
+import Config from "@constants/config"
+import { WordType } from "@constants/types"
+import { randomArray } from "@utils/utils"
 import { useEffect, useState } from "react"
-import { Box, Button, Center, Flex, Input } from "@chakra-ui/react"
+import { Box, Button, Center, Container, Flex, Input, VStack } from "@chakra-ui/react"
 
 function ConjugationPage() {
   const size = 10
@@ -18,13 +18,14 @@ function ConjugationPage() {
 
   useEffect(() => {
     setWords(randomArray(0, wordsArr.length - 1, 100))
+    setPage(1)
   }, [kana])
 
   function handleNextPage() {
-    if ((page + 1) * size < words.length) {
-      setPage(page + 1)
-    } else {
+    if ((page + 1) * size > words.length) {
       alert("No more words")
+    } else {
+      setPage(page + 1)
     }
   }
 
@@ -32,8 +33,8 @@ function ConjugationPage() {
   const pageWords = words.slice((page - 1) * size, page * size)
   for (let i = 0; i < pageWords.length; i++) {
     conjugationInputList.push(
-      <Flex key={i} flexWrap="wrap">
-        <Center>{wordsArr[pageWords[i]].conjugations.plain[conjugation].text}</Center>
+      <Flex key={i} justifyContent='space-between' w='100%'>
+        <Center fontSize={['sm', 'md', 'lg', 'xl']}>{wordsArr[pageWords[i]].text} ({wordsArr[pageWords[i]].pronunciation})</Center>
         <Box>
           <Input></Input>
         </Box>
@@ -42,16 +43,18 @@ function ConjugationPage() {
   }
 
   return (
-    <Box p={8}>
+    <Container p={8}>
       <h1>{kana} page</h1>
       {words.length}
-      {conjugationInputList}
-      <Flex>
-        <Button >看成绩</Button>
-        <Button onClick={handleNextPage}>下一页</Button>
-        <Button >解答</Button>
+      <VStack spacing={4}>
+        {conjugationInputList}
+      </VStack>
+      <Flex justifyContent='space-around' w='80%' mt={16}>
+        <Button colorScheme='teal'>看成绩</Button>
+        <Button colorScheme='teal' onClick={handleNextPage}>再一次</Button>
+        <Button colorScheme='teal'>解答</Button>
       </Flex>
-    </Box>
+    </Container>
   )
 }
 

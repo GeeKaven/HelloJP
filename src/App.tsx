@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Layout from "./components/Layout"
-import Home from "./pages/HomePage"
-import Verb from "./pages/VerbPage"
-import Conjugation from "./pages/VerbPage/ConjugationPage"
+import Layout from "@components/Layout"
+import HomePage from "@components/page/HomePage"
+import VerbPage from "@components/page/VerbPage"
+import ConjugationPage from "@components/page/ConjugationPage"
 
 function App() {
 
@@ -10,9 +10,9 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="verbs" element={<Verb />}/>
-          <Route path="verbs/:kana" element={<Conjugation />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="verbs" element={<VerbPage />}/>
+          <Route path="verbs/:kana" element={<ConjugationPage />} />
         </Routes>
       </Layout>
     </Router>

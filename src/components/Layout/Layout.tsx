@@ -1,6 +1,6 @@
 import { useDisclosure, useColorModeValue, Box, Drawer, DrawerContent } from '@chakra-ui/react'
-import Header from '../Header'
-import SideBar from '../SideBar'
+import Header from './Header'
+import SideBar from './SideBar'
 
 export type LayoutProps = {
   children: React.ReactNode,

@@ -1,6 +1,6 @@
 import { useColorModeValue, Box, Flex, Text, CloseButton, UnorderedList, ListItem, List } from '@chakra-ui/react'
 import React, { MouseEventHandler } from 'react'
-import NavLink from '../NavLink'
+import NavLink from './NavLink'
 import { Menu } from '../../constants/menu'
 
 export type HeaderProps = {
