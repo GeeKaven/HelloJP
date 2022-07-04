@@ -15,5 +15,8 @@ export default defineConfig({
       "@utils": resolve(__dirname, './src/utils/'),
       "@db": resolve(__dirname, './src/db/')
     },
+  },
+  server: {
+    host: '0.0.0.0'
   }
 })

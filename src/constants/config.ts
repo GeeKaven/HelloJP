@@ -14,7 +14,11 @@ const CONJUGATION_ENUM = {
   POTENTIAL: 12,
 }
 
-const CONJUGATION_NAME = {
+type CONJUGATION_NAME_TYPE = {
+  [key: number]: string
+}
+
+const CONJUGATION_NAME: CONJUGATION_NAME_TYPE = {
   0: '辞書形',           // Present
   1: 'ない形',           // Negative
   2: 'た形',            // Past
