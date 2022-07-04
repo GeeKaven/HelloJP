@@ -1,14 +1,14 @@
 export type ConjugationType = {
   text: string,
   conjugation: number,
-  keigo: boolean,
+  keigo: number,
   pronunciation?: string,
 }
 
 export type WordType = {
   text: string,
   conjugation: number,
-  keigo: boolean,
+  keigo: number,
   dictId: number,
   pronunciation?: string,
   conjugations: {
