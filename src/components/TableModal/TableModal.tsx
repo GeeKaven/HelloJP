@@ -17,7 +17,7 @@ export type TableModalValueType = {
   type: TABLE_TYPE
 }
 
-export type TableModalType = {
+export type TableModalProps = {
   value: TableModalValueType
 }
 
@@ -26,7 +26,7 @@ export type TableModalRef = {
   modalIsOpen: () => boolean
 }
 
-const TableModal = forwardRef(({ value }: TableModalType, ref) => {
+const TableModal = forwardRef(({ value }: TableModalProps, ref) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 

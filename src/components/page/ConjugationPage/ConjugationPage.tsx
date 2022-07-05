@@ -53,7 +53,7 @@ function ConjugationPage() {
     }
     console.log(newScore)
     setModalValue({ table: newScore, title: '成绩', type: TABLE_TYPE.SCORE })
-    if (modalRef.current !== null) { modalRef.current.onOpen() }
+    modalRef.current?.onOpen()
   }
 
   function handleAnswer() {
@@ -66,7 +66,7 @@ function ConjugationPage() {
       }
     }
     setModalValue({table: newAnswer, title: '解答', type: TABLE_TYPE.ANSWER})
-    if (modalRef.current !== null) { modalRef.current.onOpen() }
+    modalRef.current?.onOpen()
   }
 
   const conjugationInputList: any[] = []
