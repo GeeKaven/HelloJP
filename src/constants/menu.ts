@@ -5,7 +5,7 @@ export const Menu = [
   { name: '首页', icon: FiHome, to: '/' },
   { name: '首页', icon: FiHome, to: '/' },
   {
-    name: '动词变形练习', icon: FiHome, to: '/verbs',
+    name: '动词活用', icon: FiHome, to: '/verbs',
     sub: [
       { name: 'て形', icon: FiHome, to: '/verbs/te' },
       { name: 'た形', icon: FiHome, to: '/verbs/ta' },

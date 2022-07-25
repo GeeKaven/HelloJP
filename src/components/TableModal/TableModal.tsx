@@ -1,9 +1,6 @@
-import { Button, Flex, forwardRef, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Tr, useDisclosure, VStack } from "@chakra-ui/react"
-import { useImperativeHandle } from "react"
-
 export enum TABLE_TYPE {
   ANSWER,
-  SCORE
+  SCORE,
 }
 
 export type TableValueType = {
@@ -12,8 +9,9 @@ export type TableValueType = {
 }
 
 export type TableModalValueType = {
-  table: TableValueType[],
-  title: string
+  table: TableValueType[]
+  title: string,
+  modalId: string,
   type: TABLE_TYPE
 }
 
@@ -21,73 +19,72 @@ export type TableModalProps = {
   value: TableModalValueType
 }
 
-export type TableModalRef = {
-  onOpen: () => void,
-  modalIsOpen: () => boolean
-}
+const TableModal = ({ value }: TableModalProps) => {
 
-const TableModal = forwardRef(({ value }: TableModalProps, ref) => {
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const { table, title, type } = value
-
-  useImperativeHandle(ref, () => ({
-    onOpen,
-    modalIsOpen() {
-      return isOpen
-    }
-  }))
+  const { table, title, type, modalId } = value
 
   const body = (
-    <TableContainer>
-      <Table size={['sm', 'md']}>
-        <Tbody>
-          {table.map((v, i) => (
-            <Tr key={i}>
-              <Td>{v.t1}</Td>
-              <Td>{type === TABLE_TYPE.SCORE ? v.t2 === '1' ? '✔️' : '❌' : v.t2}</Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+    <table className='table'>
+      <tbody>
+        {table.map((v, i) => (
+          <tr key={i}>
+            <td>{v.t1}</td>
+            <td>
+              {type === TABLE_TYPE.SCORE ? (v.t2 === '1' ? '✔️' : '❌') : v.t2}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   )
 
   let score = null
   if (type === TABLE_TYPE.SCORE) {
-    const totalScore = table.map((v) => parseInt(v.t2)).reduce((p, r) => p + r, 0)
+    const totalScore = table
+      .map((v) => parseInt(v.t2))
+      .reduce((p, r) => p + r, 0)
     const poor = totalScore < 8
+
     score = (
-      <Flex flexWrap='wrap' justifyContent='space-between' alignItems='center' p='4'>
-        <VStack align='left'>
-          <Text color='green'>{totalScore == table.length ? '正确解答所有问题！' : `${table.length}题中答对${totalScore}题`}</Text>
-          <Text color={poor ? 'green' : 'red'}>
-            {poor ? '再加油吧！(￣□￣|||' : totalScore < table.length ? '不錯喔！（*^ _ ^*）' : '恭喜您! 、\\ \\( ⌒▽⌒ )/ /'}
-          </Text>
-        </VStack>
-        <Text align='center' color='red' fontSize={['2xl', '4xl']} as='u' fontWeight='bold'>{totalScore * 10} 分</Text>
-      </Flex>
+      <div className='flex flex-wrap justify-between items-center p-4'>
+        <div className='flex flex-col'>
+          <p className='text-green'>
+            {totalScore == table.length
+              ? '正确解答所有问题！'
+              : `${table.length}题中答对${totalScore}题`}
+          </p>
+          <p className={`${poor ? 'text-green' : 'text-red'}`}>
+            {poor
+              ? '再加油吧！(￣□￣|||'
+              : totalScore < table.length
+              ? '不錯喔！（*^ _ ^*）'
+              : '恭喜您! 、\\ \\( ⌒▽⌒ )/ /'}
+          </p>
+        </div>
+        <p className='text-center text-red md:text-4xl text-2xl font-bold'>
+          {totalScore * 10} 分
+        </p>
+      </div>
     )
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+    <div>
+      <input type='checkbox' id={modalId} className='modal-toggle' />
+      <div className='modal'>
+        <div className='modal-box'>
+          <h3 className="font-bold text-lg">{title}</h3>
           {body}
           {score}
-        </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme='teal' onClick={onClose}>关闭</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          <div className='modal-action'>
+            <label htmlFor={modalId} className='btn'>
+              Yay!
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
   )
-})
+}
 
 export default TableModal
